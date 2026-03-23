@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GeoMMBench &amp; GeoMMAgent</title>
+  <meta name="description" content="面向地球科学与遥感的多模态评测基准与多智能体框架（CVPR 2026）" />
+  <style>
+    /* Light academic layout inspired by project pages such as https://vfm-6d.github.io */
+    :root {
+      --bg-page: #f5f6f8;
+      --bg-paper: #ffffff;
+      --text: #1a1d21;
+      --muted: #5c636a;
+      --link: #3273dc;
+      --link-hover: #2366d1;
+      --border: #e8eaed;
+      --pill-bg: #2b2d31;
+      --pill-text: #ffffff;
+      --code: #b35c00;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      background: var(--bg-page);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .paper {
+      background: var(--bg-paper);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    @media (min-width: 640px) {
+      .paper {
+        padding: 3rem 3rem 3.5rem;
+      }
+    }
+
+    header {
+      text-align: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+      max-width: 22ch;
+      margin: 0 auto;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--bg-page);
+    }
+
+    .badge strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 1.75rem;
+    }
+
+    .links a {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--pill-text);
+      background: var(--pill-bg);
+      text-decoration: none;
+      padding: 0.5rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .links a:hover {
+      color: var(--pill-text);
+      text-decoration: none;
+      opacity: 0.92;
+    }
+
+    section {
+      margin-top: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      max-width: 65ch;
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .news {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+    }
+
+    .news ul {
+      list-style: none;
+    }
+
+    .news li {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      padding-left: 0;
+    }
+
+    .news li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .two-col {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      height: 100%;
+    }
+
+    .card h3 {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9375rem;
+      margin-bottom: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-top: 0.35rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    thead th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+      text-transform: none;
+      letter-spacing: 0;
+      border-bottom: 2px solid var(--border);
+    }
+
+    tbody th[scope="row"] {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+      width: 28%;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    td code,
+    .inline-code {
+      font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+      font-size: 0.8125rem;
+      color: var(--code);
+      background: var(--bg-page);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+
+    .cite {
+      font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      line-height: 1.65;
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.15rem 1.25rem;
+      overflow-x: auto;
+      color: var(--muted);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--link);
+    }
+
+    footer a:hover {
+      color: var(--link-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="paper">
+      <header>
+        <p class="eyebrow">Geoscience · Remote Sensing · CVPR 2026</p>
+        <h1>GeoMMBench <em>&amp;</em> GeoMMAgent</h1>
+        <div class="badges">
+          <span class="badge"><strong>GeoMMBench</strong> · 1,053 MCQ</span>
+          <span class="badge"><strong>4</strong> disciplines</span>
+          <span class="badge"><strong>6</strong> sensor modalities</span>
+          <span class="badge">Apache 2.0</span>
+        </div>
+        <nav class="links" aria-label="外部链接">
+          <a href="https://github.com/Shihao-Cheng/GeoMMAgent" target="_blank" rel="noopener">Code</a>
+          <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" rel="noopener">Paper</a>
+          <a href="https://huggingface.co/datasets/GeoMM/GeoMMBench" target="_blank" rel="noopener">Dataset</a>
+          <a href="https://geomm.github.io" target="_blank" rel="noopener">Project Page</a>
+        </nav>
+      </header>
+
+      <section id="news" aria-labelledby="news-h">
+        <h2 id="news-h">News</h2>
+        <div class="news">
+          <ul>
+            <li><strong>2026/03</strong> — GeoMMBench &amp; GeoMMAgent 被 <strong>CVPR 2026</strong> 接收。</li>
+            <li><strong>2026/03</strong> — GeoMMBench 数据集已发布于 Hugging Face（1,053 道专家级选择题）。</li>
+            <li><strong>2026/03</strong> — GeoMMAgent 代码（coordinator、exec_agents、toolkit）开源。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="intro" aria-labelledby="intro-h">
+        <h2 id="intro-h">简介</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>GeoMMBench</h3>
+            <p>面向地球科学与遥感的<strong>多模态问答评测基准</strong>，含基于图像的选择题，覆盖遥感、摄影测量、GIS、GNSS 等方向及多种传感器与任务类型。</p>
+          </div>
+          <div class="card">
+            <h3>GeoMMAgent</h3>
+            <p>遵循 <strong>规划—执行—评估</strong> 的多智能体框架，整合通用工具、检索、感知（分类/检测/分割）与推理对齐，支持复杂地理空间问答流程。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="toolkits" aria-labelledby="toolkits-h">
+        <h2 id="toolkits-h">Toolkit</h2>
+        <table>
+          <thead>
+            <tr><th scope="col">类型</th><th scope="col">能力（本仓库）</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">General</th>
+              <td>格式转换、滤波、缩放、可选超分（Real-ESRGAN）等 · <code>toolkit/general.py</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Knowledge</th>
+              <td>网页检索与证据图像；GME 文本–图像相似度排序 · <code>toolkit/gme_filter.py</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Perception</th>
+              <td>YOLO11 分类与检测；DeepLabV3+（Xception）语义分割</td>
+            </tr>
+            <tr>
+              <th scope="row">Reasoning</th>
+              <td>多模态 LLM 推理与选项对齐</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="agents" aria-labelledby="agents-h">
+        <h2 id="agents-h">Agents</h2>
+        <table>
+          <thead>
+            <tr><th scope="col">角色</th><th scope="col">职责</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Coordinator</th>
+              <td>任务规划、分解与编排 · <code>coordinator/</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Perception</th>
+              <td>分类、检测、DeepLab 分割</td>
+            </tr>
+            <tr>
+              <th scope="row">Search</th>
+              <td>检索与下游 VLM 用的证据图像</td>
+            </tr>
+            <tr>
+              <th scope="row">Reasoning / Matching</th>
+              <td>多步推理与 MCQ 对齐</td>
+            </tr>
+            <tr>
+              <th scope="row">Self-Evaluation</th>
+              <td>可选质量检查 · <code>exec_agents/evaluation/</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="citation" aria-labelledby="cite-h">
+        <h2 id="cite-h">Citation</h2>
+        <pre class="cite">@inproceedings{xiao2026geomm,
+  title={GeoMMBench and GeoMMAgent: Toward Expert-Level Multimodal Intelligence in Geoscience and Remote Sensing},
+  author={Xiao, Aoran and Cheng, Shihao and Xu, Yonghao and Ren, Yexian and Chen, Hongruixuan and Yokoya, Naoto},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}</pre>
+      </section>
+
+      <footer>
+        <p>GeoMMBench 数据集采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>；代码采用 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache 2.0</a>。</p>
+        <p style="margin-top: 0.75rem">本地预览：在仓库根目录执行 <code class="inline-code">python -m http.server 8080 --directory web</code> 后访问 <code class="inline-code">http://127.0.0.1:8080</code>。</p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
