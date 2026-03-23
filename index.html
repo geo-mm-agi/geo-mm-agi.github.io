@@ -58,17 +58,41 @@
       line-height: 1.8;
     }
 
-    .author-block { white-space: nowrap; }
-    .author-block a { color: var(--link); }
-
-    .affil-row {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin-bottom: 1.75rem;
-      line-height: 1.6;
+    .author-line {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0 0.15rem;
+      row-gap: 0.4rem;
+      font-family: "Times New Roman", Times, "Liberation Serif", Georgia, serif;
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
     }
 
-    .affil-row sup { font-size: 0.65em; }
+    .author-block { white-space: nowrap; }
+    .author-block a { color: var(--link); }
+    .author-line sup { font-size: 0.7em; font-weight: normal; }
+
+    .author-notes {
+      font-family: "Times New Roman", Times, "Liberation Serif", Georgia, serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .affil-block {
+      font-family: "Times New Roman", Times, "Liberation Serif", Georgia, serif;
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+
+    .affil-block p { margin: 0 0 0.35rem; }
+    .affil-block p:last-child { margin-bottom: 0; }
+    .affil-block sup { font-size: 0.65em; }
 
     .publication-links {
       display: flex;
@@ -265,22 +289,24 @@
     <div class="container">
       <h1 class="title publication-title">GeoMMBench &amp; GeoMMAgent: A Multimodal Benchmark and Multi-Agent Framework for GeoScience and Remote Sensing</h1>
 
-      <div class="is-size-5 publication-authors">
-        <span class="author-block"><a href="#">Aoran Xiao</a><sup>1</sup>,</span>
-        <span class="author-block"><a href="https://github.com/Shihao-Cheng" target="_blank" rel="noopener">Shihao Cheng</a><sup>1</sup>,</span>
-        <span class="author-block"><a href="#" target="_blank" rel="noopener">Yonghao Xu</a><sup>2</sup>,</span>
+      <div class="author-line publication-authors" aria-label="Authors">
+        <span class="author-block"><a href="#">Aoran Xiao</a><sup>*</sup><sup>1</sup><sup>†</sup>,</span>
+        <span class="author-block"><a href="https://github.com/Shihao-Cheng" target="_blank" rel="noopener">Shihao Cheng</a><sup>*</sup><sup>2</sup>,</span>
+        <span class="author-block"><a href="#">Yonghao Xu</a><sup>3</sup>,</span>
+        <span class="author-block"><a href="#">Yexian Ren</a><sup>5</sup>,</span>
+        <span class="author-block"><a href="#">Hongruixuan Chen</a><sup>1</sup><sup>4</sup>,</span>
+        <span class="author-block"><a href="#">Naoto Yokoya</a><sup>1</sup><sup>4</sup></span>
       </div>
-      <div class="is-size-5 publication-authors">
-        <span class="author-block"><a href="#" target="_blank" rel="noopener">Yexian Ren</a><sup>3</sup>,</span>
-        <span class="author-block"><a href="#" target="_blank" rel="noopener">Hongruixuan Chen</a><sup>4</sup>,</span>
-        <span class="author-block"><a href="https://naist.jp/en/" target="_blank" rel="noopener">Naoto Yokoya</a><sup>1</sup></span>
-      </div>
+      <p class="author-notes"><sup>*</sup> Equal contribution &nbsp;&nbsp;&nbsp; <sup>†</sup> Corresponding author</p>
 
-      <div class="affil-row">
-        <sup>1</sup>Nara Institute of Science and Technology (NAIST) &nbsp;·&nbsp;
-        <sup>2</sup>Affiliation — see paper &nbsp;·&nbsp;
-        <sup>3</sup>Affiliation — see paper &nbsp;·&nbsp;
-        <sup>4</sup>Affiliation — see paper
+      <div class="affil-block">
+        <p>
+          <sup>1</sup> RIKEN AIP &nbsp;&nbsp;&nbsp;
+          <sup>2</sup> Wuhan University &nbsp;&nbsp;&nbsp;
+          <sup>3</sup> Linköping University &nbsp;&nbsp;&nbsp;
+          <sup>4</sup> University of Tokyo
+        </p>
+        <p><sup>5</sup> Nanjing University of Information Science and Technology</p>
       </div>
 
       <div class="badge-row" aria-hidden="true">
@@ -304,7 +330,7 @@
             </a>
           </span>
           <span class="link-block">
-            <a href="https://huggingface.co/datasets/GeoMM/GeoMMBench" class="external-link button is-normal is-rounded is-dark">
+            <a href="https://huggingface.co/datasets/AR-X/GeoMMBench" class="external-link button is-normal is-rounded is-dark">
               <span class="icon">🤗</span>
               <span>Dataset</span>
             </a>
@@ -362,7 +388,7 @@
       <div class="content columns news">
         <ul>
           <li><strong>2026/03:</strong> GeoMMBench &amp; GeoMMAgent accepted by <strong>CVPR 2026</strong>.</li>
-          <li><strong>2026/03:</strong> GeoMMBench released on <a href="https://huggingface.co/datasets/GeoMM/GeoMMBench" target="_blank" rel="noopener">Hugging Face</a> (1,053 questions).</li>
+          <li><strong>2026/03:</strong> GeoMMBench released on <a href="https://huggingface.co/datasets/AR-X/GeoMMBench" target="_blank" rel="noopener">Hugging Face</a> (1,053 questions).</li>
           <li><strong>2026/03:</strong> GeoMMAgent code (coordinator, exec_agents, toolkit) open-sourced.</li>
         </ul>
       </div>
@@ -378,7 +404,7 @@
           alt="GeoMMAgent framework"
           onerror="this.style.display='none'"
         >
-        <p class="caption">Coordinator orchestrates agents; toolkits cover general utilities, knowledge retrieval, perception, and reasoning (see README for details).</p>
+        <p class="caption">Coordinator orchestrates agents; toolkits cover general utilities, knowledge retrieval, perception, and reasoning.</p>
       </div>
 
       <h3>Toolkits (this repository)</h3>
@@ -390,11 +416,11 @@
           <tbody>
             <tr>
               <td>General</td>
-              <td>Format conversion, filtering, scaling, optional neural super-resolution (Real-ESRGAN), etc. (<code>toolkit/general.py</code>)</td>
+              <td>Format conversion, filtering, scaling, optional neural super-resolution, etc.</td>
             </tr>
             <tr>
               <td>Knowledge</td>
-              <td>Web search (DuckDuckGo → Google → Bing → Wikipedia); optional image search; <strong>GME</strong> text–image similarity (<code>toolkit/gme_filter.py</code>)</td>
+              <td>Web search (multi-engine fallback); optional image search; <strong>GME</strong> text–image similarity for candidate ranking</td>
             </tr>
             <tr>
               <td>Perception</td>
@@ -415,11 +441,11 @@
             <tr><th>Agent</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>Coordinator</td><td>Planning, decomposition, orchestration (<code>coordinator/</code>)</td></tr>
+            <tr><td>Coordinator</td><td>Planning, decomposition, orchestration</td></tr>
             <tr><td>Perception (Cls / Det / Seg)</td><td>Classification, detection, DeepLab segmentation</td></tr>
             <tr><td>Search</td><td>Retrieval and evidence images for VLMs</td></tr>
             <tr><td>Reasoning / Matching</td><td>Multi-step inference and MCQ alignment</td></tr>
-            <tr><td>Self-Evaluation</td><td>Optional quality check (<code>exec_agents/evaluation/</code>)</td></tr>
+            <tr><td>Self-Evaluation</td><td>Optional quality check</td></tr>
           </tbody>
         </table>
       </div>
@@ -457,47 +483,19 @@ exec_agents/
   └── evaluation/           ← SelfEvaluationAgent (optional)
 
 configs/
-  └── GeoMMBench.yaml       ← Coordinator & agents; gme: & SegAgent.deeplab_weights
+  └── GeoMMBench.yaml       ← Coordinator & agent settings
 
 toolkit/
   ├── general.py
   ├── classification_toolkit.py   ← YOLO11 classification
   ├── detection_toolkit.py        ← YOLO11 OBB detection
-  ├── segmentation_toolkit.py   ← DeepLabV3+ Xception inference
+  ├── segmentation_toolkit.py   ← DeepLabV3+ (Xception)
   ├── deeplabv3plus_xception/
   ├── gme_filter.py
   ├── knowledge.py
   ├── reasoning.py
   ├── super_resolution.py
-  └── data_loader.py            ← GeoMMBench parquet loader</pre>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container content">
-      <h2 class="title is-3">Quick Start</h2>
-
-      <h3>Installation</h3>
-      <pre>git clone https://github.com/Shihao-Cheng/GeoMMAgent.git
-cd GeoMMAgent
-pip install -r requirements.txt</pre>
-      <p>For GPU, install a matching <strong>PyTorch</strong> build from <a href="https://pytorch.org/">pytorch.org</a>. Segmentation and GME may require compatible <code>transformers</code> versions.</p>
-
-      <h3>Environment</h3>
-      <pre>cp .env_template .env
-# Edit .env: QWEN_API_KEY, optional GOOGLE_API_KEY + SEARCH_ENGINE_ID, etc.</pre>
-
-      <h3>Run</h3>
-      <pre>pip install -r requirements.txt
-cp .env_template .env   # set API keys
-
-# Single query (plan → execute → trace)
-python run/run_geomm.py --single "这张遥感图像中有几架飞机？" --image /path/to/image.png
-
-# Benchmark on GeoMMBench parquet
-python run/run_geomm.py --bench datasets/validation.parquet
-python run/run_geomm.py --bench datasets/validation.parquet --limit 5</pre>
-      <p>Parallel benchmark: <code>python run/run_benchmark_parallel.py --parquet datasets/validation.parquet</code>. Place weights under <code>weights/</code>; optional Real-ESRGAN in <code>Real-ESRGAN-master/</code> per config. Defaults: <code>configs/GeoMMBench.yaml</code>; entry <code>run/run_geomm.py</code>.</p>
+  └── data_loader.py            ← GeoMMBench data loader</pre>
     </div>
   </section>
 
@@ -505,48 +503,8 @@ python run/run_geomm.py --bench datasets/validation.parquet --limit 5</pre>
     <div class="container content">
       <h2 class="title is-3">Dataset</h2>
       <pre>from datasets import load_dataset
-ds = load_dataset("GeoMM/GeoMMBench")</pre>
-      <p>Each sample: <code>image</code>, <code>question</code>, <code>options (A/B/C/D)</code>, <code>answer</code>. For benchmarking, symlink or place Parquet at <code>datasets/validation.parquet</code> or pass <code>--parquet</code>.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container content">
-      <h2 class="title is-3">Model Weights</h2>
-      <table>
-        <thead>
-          <tr><th>Component</th><th>Hugging Face</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>YOLO11-cls</td>
-            <td><a href="https://huggingface.co/GeoMM/yolo11-cls-millionaid" target="_blank" rel="noopener">GeoMM/yolo11-cls-sft</a></td>
-          </tr>
-          <tr>
-            <td>YOLO11-obb</td>
-            <td><a href="https://huggingface.co/GeoMM/yolo11-obb-dotav2" target="_blank" rel="noopener">GeoMM/yolo11-obb-sft</a></td>
-          </tr>
-          <tr>
-            <td>DeepLabV3+ (LoveDA)</td>
-            <td><a href="https://huggingface.co/GeoMM/deeplabv3plus-loveda" target="_blank" rel="noopener">GeoMM/deeplabv3plus-loveda</a></td>
-          </tr>
-          <tr>
-            <td>GME</td>
-            <td>Local path in <code>configs/GeoMMBench.yaml</code> → <code>gme.model_path</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container content">
-      <h2 class="title is-3">Extending GeoMMAgent</h2>
-      <ol style="padding-left:1.25rem;color:var(--muted)">
-        <li>Add tools under <code>toolkit/</code> and bind in <code>exec_agents/</code> via <code>BaseExecAgent</code>, <code>get_tools()</code>.</li>
-        <li>Register agents in <code>configs/GeoMMBench.yaml</code> and <code>configs/loader.py</code> <code>AGENT_REGISTRY</code>.</li>
-        <li>Run with <code>run/run_geomm.py</code> → <code>build_agents_from_config()</code>.</li>
-      </ol>
+ds = load_dataset("AR-X/GeoMMBench")</pre>
+      <p>Each sample includes <code>image</code>, <code>question</code>, option texts <code>A</code>–<code>D</code>, and <code>answer</code> (see the <a href="https://huggingface.co/datasets/AR-X/GeoMMBench" target="_blank" rel="noopener">dataset card</a> for splits).</p>
     </div>
   </section>
 
