@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GeoMMBench &amp; GeoMMAgent</title>
-  <meta name="description" content="面向地球科学与遥感的多模态评测基准与多智能体框架（CVPR 2026）" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Name — 个人主页">
+  <title>Your Name</title>
   <style>
-    /* Light academic layout inspired by project pages such as https://vfm-6d.github.io */
     :root {
       --bg-page: #f5f6f8;
       --bg-paper: #ffffff;
@@ -17,406 +16,229 @@
       --border: #e8eaed;
       --pill-bg: #2b2d31;
       --pill-text: #ffffff;
-      --code: #b35c00;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       font-size: 1rem;
-      font-weight: 400;
-      background: var(--bg-page);
-      color: var(--text);
       line-height: 1.7;
+      color: var(--text);
+      background: var(--bg-page);
       min-height: 100vh;
     }
 
-    a {
-      color: var(--link);
-      text-decoration: none;
-    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    a:hover {
-      color: var(--link-hover);
-      text-decoration: underline;
-    }
-
-    .wrap {
+    .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 2.5rem 1.25rem 4rem;
+      padding: 0 1.25rem;
     }
 
-    .paper {
+    /* Hero — 对应原模板 publication header */
+    .hero {
       background: var(--bg-paper);
-      border-radius: 6px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-      padding: 2.5rem 2rem 3rem;
-    }
-
-    @media (min-width: 640px) {
-      .paper {
-        padding: 3rem 3rem 3.5rem;
-      }
-    }
-
-    header {
-      text-align: center;
-      padding-bottom: 2rem;
       border-bottom: 1px solid var(--border);
+      padding: 3rem 0 2.5rem;
+      text-align: center;
     }
 
-    .eyebrow {
-      font-size: 0.8125rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.02em;
-    }
-
-    h1 {
-      font-size: clamp(1.5rem, 4vw, 2rem);
+    .hero .title {
+      font-size: clamp(1.35rem, 4vw, 2rem);
       font-weight: 700;
-      line-height: 1.25;
-      color: var(--text);
+      line-height: 1.3;
       max-width: 22ch;
-      margin: 0 auto;
+      margin: 0 auto 0.75rem;
     }
 
-    h1 em {
-      font-style: normal;
-      color: var(--text);
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
+    .hero .authors {
+      font-size: 1rem;
       color: var(--muted);
-      background: var(--bg-page);
+      margin-bottom: 0.35rem;
     }
 
-    .badge strong {
-      color: var(--text);
-      font-weight: 600;
+    .hero .affil {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
     }
 
-    .links {
+    .hero .links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.65rem;
-      margin-top: 1.75rem;
     }
 
-    .links a {
-      display: inline-block;
+    .hero .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--pill-text);
       background: var(--pill-bg);
-      text-decoration: none;
-      padding: 0.5rem 1.15rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 999px;
+      text-decoration: none;
       border: 1px solid transparent;
-      transition: background 0.15s, opacity 0.15s;
     }
 
-    .links a:hover {
+    .hero .links a:hover {
+      opacity: 0.92;
       color: var(--pill-text);
       text-decoration: none;
-      opacity: 0.92;
     }
 
-    section {
-      margin-top: 2.5rem;
+    /* Section — 对应 Abstract / Method / BibTeX */
+    .section {
+      padding: 2.25rem 0;
     }
 
-    h2 {
+    .section:nth-child(even) {
+      background: var(--bg-paper);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section h2 {
       font-size: 1.25rem;
       font-weight: 700;
-      margin-bottom: 0.85rem;
-      color: var(--text);
-    }
-
-    p {
-      color: var(--muted);
       margin-bottom: 1rem;
-      max-width: 65ch;
+      text-align: center;
     }
 
-    p strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .news {
-      background: var(--bg-page);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-    }
-
-    .news ul {
-      list-style: none;
-    }
-
-    .news li {
-      font-size: 0.9375rem;
+    .section .content {
       color: var(--muted);
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      padding-left: 0;
+      text-align: justify;
+      hyphens: auto;
     }
 
-    .news li:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
+    .section .content p + p {
+      margin-top: 0.85rem;
     }
 
-    .two-col {
-      display: grid;
-      gap: 1.25rem;
-    }
-
-    @media (min-width: 640px) {
-      .two-col {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .card {
-      background: var(--bg-page);
-      border: 1px solid var(--border);
+    .figure {
+      margin: 1.25rem auto 0;
+      max-width: 100%;
       border-radius: 6px;
-      padding: 1.25rem;
-      height: 100%;
-    }
-
-    .card h3 {
-      font-size: 0.8125rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      font-size: 0.9375rem;
-      margin-bottom: 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #eef1f4 0%, #f8f9fa 100%);
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
       font-size: 0.875rem;
-      margin-top: 0.35rem;
+      padding: 1rem;
+      text-align: center;
     }
 
-    th, td {
-      text-align: left;
-      padding: 0.65rem 0.5rem;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
+    .figure img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
     }
 
-    thead th {
+    pre.cite {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
       font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text);
-      text-transform: none;
-      letter-spacing: 0;
-      border-bottom: 2px solid var(--border);
-    }
-
-    tbody th[scope="row"] {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--text);
-      width: 28%;
-    }
-
-    td {
-      color: var(--muted);
-    }
-
-    td code,
-    .inline-code {
-      font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
-      font-size: 0.8125rem;
-      color: var(--code);
-      background: var(--bg-page);
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
-    }
-
-    .cite {
-      font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
-      font-size: 0.75rem;
-      line-height: 1.65;
+      line-height: 1.6;
       background: var(--bg-page);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 1.15rem 1.25rem;
+      padding: 1rem 1.15rem;
       overflow-x: auto;
       color: var(--muted);
       white-space: pre-wrap;
       word-break: break-word;
     }
 
-    footer {
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
+    footer.footer {
+      padding: 2rem 0;
       font-size: 0.8125rem;
       color: var(--muted);
+      text-align: center;
     }
 
-    footer a {
-      color: var(--link);
-    }
-
-    footer a:hover {
-      color: var(--link-hover);
-    }
+    footer.footer a { color: var(--link); }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="paper">
-      <header>
-        <p class="eyebrow">Geoscience · Remote Sensing · CVPR 2026</p>
-        <h1>GeoMMBench <em>&amp;</em> GeoMMAgent</h1>
-        <div class="badges">
-          <span class="badge"><strong>GeoMMBench</strong> · 1,053 MCQ</span>
-          <span class="badge"><strong>4</strong> disciplines</span>
-          <span class="badge"><strong>6</strong> sensor modalities</span>
-          <span class="badge">Apache 2.0</span>
-        </div>
-        <nav class="links" aria-label="外部链接">
-          <a href="https://github.com/Shihao-Cheng/GeoMMAgent" target="_blank" rel="noopener">Code</a>
-          <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" rel="noopener">Paper</a>
-          <a href="https://huggingface.co/datasets/GeoMM/GeoMMBench" target="_blank" rel="noopener">Dataset</a>
-          <a href="https://geomm.github.io" target="_blank" rel="noopener">Project Page</a>
-        </nav>
-      </header>
 
-      <section id="news" aria-labelledby="news-h">
-        <h2 id="news-h">News</h2>
-        <div class="news">
-          <ul>
-            <li><strong>2026/03</strong> — GeoMMBench &amp; GeoMMAgent 被 <strong>CVPR 2026</strong> 接收。</li>
-            <li><strong>2026/03</strong> — GeoMMBench 数据集已发布于 Hugging Face（1,053 道专家级选择题）。</li>
-            <li><strong>2026/03</strong> — GeoMMAgent 代码（coordinator、exec_agents、toolkit）开源。</li>
-          </ul>
-        </div>
-      </section>
+  <!-- ========== 将下方 Your Name、单位、链接 href 改成你的信息 ========== -->
 
-      <section id="intro" aria-labelledby="intro-h">
-        <h2 id="intro-h">简介</h2>
-        <div class="two-col">
-          <div class="card">
-            <h3>GeoMMBench</h3>
-            <p>面向地球科学与遥感的<strong>多模态问答评测基准</strong>，含基于图像的选择题，覆盖遥感、摄影测量、GIS、GNSS 等方向及多种传感器与任务类型。</p>
-          </div>
-          <div class="card">
-            <h3>GeoMMAgent</h3>
-            <p>遵循 <strong>规划—执行—评估</strong> 的多智能体框架，整合通用工具、检索、感知（分类/检测/分割）与推理对齐，支持复杂地理空间问答流程。</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="toolkits" aria-labelledby="toolkits-h">
-        <h2 id="toolkits-h">Toolkit</h2>
-        <table>
-          <thead>
-            <tr><th scope="col">类型</th><th scope="col">能力（本仓库）</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">General</th>
-              <td>格式转换、滤波、缩放、可选超分（Real-ESRGAN）等 · <code>toolkit/general.py</code></td>
-            </tr>
-            <tr>
-              <th scope="row">Knowledge</th>
-              <td>网页检索与证据图像；GME 文本–图像相似度排序 · <code>toolkit/gme_filter.py</code></td>
-            </tr>
-            <tr>
-              <th scope="row">Perception</th>
-              <td>YOLO11 分类与检测；DeepLabV3+（Xception）语义分割</td>
-            </tr>
-            <tr>
-              <th scope="row">Reasoning</th>
-              <td>多模态 LLM 推理与选项对齐</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section id="agents" aria-labelledby="agents-h">
-        <h2 id="agents-h">Agents</h2>
-        <table>
-          <thead>
-            <tr><th scope="col">角色</th><th scope="col">职责</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Coordinator</th>
-              <td>任务规划、分解与编排 · <code>coordinator/</code></td>
-            </tr>
-            <tr>
-              <th scope="row">Perception</th>
-              <td>分类、检测、DeepLab 分割</td>
-            </tr>
-            <tr>
-              <th scope="row">Search</th>
-              <td>检索与下游 VLM 用的证据图像</td>
-            </tr>
-            <tr>
-              <th scope="row">Reasoning / Matching</th>
-              <td>多步推理与 MCQ 对齐</td>
-            </tr>
-            <tr>
-              <th scope="row">Self-Evaluation</th>
-              <td>可选质量检查 · <code>exec_agents/evaluation/</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section id="citation" aria-labelledby="cite-h">
-        <h2 id="cite-h">Citation</h2>
-        <pre class="cite">@inproceedings{xiao2026geomm,
-  title={GeoMMBench and GeoMMAgent: Toward Expert-Level Multimodal Intelligence in Geoscience and Remote Sensing},
-  author={Xiao, Aoran and Cheng, Shihao and Xu, Yonghao and Ren, Yexian and Chen, Hongruixuan and Yokoya, Naoto},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2026}
-}</pre>
-      </section>
-
-      <footer>
-        <p>GeoMMBench 数据集采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>；代码采用 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache 2.0</a>。</p>
-        <p style="margin-top: 0.75rem">本地预览：在仓库根目录执行 <code class="inline-code">python -m http.server 8080 --directory web</code> 后访问 <code class="inline-code">http://127.0.0.1:8080</code>。</p>
-      </footer>
+  <section class="hero">
+    <div class="container">
+      <h1 class="title">Your Name</h1>
+      <p class="authors">示例职位 · 研究方向关键词</p>
+      <p class="affil"><sup>1</sup>某某大学某某实验室 &nbsp;·&nbsp; City, Country</p>
+      <div class="links">
+        <a href="mailto:you@example.com">✉ Email</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener">X / Twitter</a>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>About</h2>
+      <div class="content">
+        <p>
+          在这里写一段自我介绍：教育背景、研究兴趣、近期关注方向等。可参考原模板 Abstract 段落长度，保持简洁易读。
+        </p>
+        <p>
+          第二段可写合作、开源项目、获奖或教学等。保存为单文件即可部署到 GitHub Pages 或任意静态托管。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Highlights</h2>
+      <div class="content">
+        <p>对应原模板 Method Overview：可放代表性工作示意图。将图片放到本目录 <code style="background:var(--bg-page);padding:0 .25rem;border-radius:3px;font-size:0.9em;">web/</code> 后，把下面占位块换成 <code style="background:var(--bg-page);padding:0 .25rem;border-radius:3px;font-size:0.9em;">&lt;img src="photo.png" alt="..."&gt;</code>。</p>
+        <div class="figure" id="figure-placeholder">
+          （占位）在此放入 &lt;img&gt; 或替换本 div 为图片
+        </div>
+        <p style="margin-top: 1rem; text-align: center; font-size: 0.9375rem;">
+          一句话说明上图或你的核心项目。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Selected publications</h2>
+      <div class="content">
+        <p>若需要 BibTeX，可保留一块；否则删掉本节或改成「News」列表。</p>
+        <pre class="cite">@article{yourkey2026,
+  title   = {Your Paper Title},
+  author  = {Your Name and Coauthor},
+  journal = {Conference or Journal},
+  year    = {2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="y"></span> Your Name · 个人主页</p>
+      <p style="margin-top:0.5rem">页面结构参考常见学术项目页模板；样式为浅色单栏布局。</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
